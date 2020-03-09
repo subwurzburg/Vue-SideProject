@@ -7,7 +7,7 @@
                     <!-- 左側選單 (List group) -->
                     <div class="list-group sticky-top">
                         <a class="list-group-item list-group-item-action" href="#" @click.prevent="searchText = item"
-                             v-for="item in categories" :key="item">
+                             v-for="item in categories" :key="item" >
                             <i class="fa fa-street-view" aria-hidden="true"></i>
                             {{ item }}
                         </a>
@@ -41,7 +41,7 @@
                     <div class="tab-pane" id="list-gift">
                         <div class="row align-items-stretch">
                             <!-- 禮品 -->
-                            <div class="col-md-4 mb-4" v-for="(item) in filterData" :key="item.id">
+                            <div class="col-md-4 mb-4" v-for="(item) in filterData" :key="item.id" v-if="item.is_enabled == 1">
                                 <div class="card border-0 box-shadow text-center h-100">
                                     <img class="card-img-top" :src="item.imageUrl" alt="Card image cap">
                                     <div class="card-body">
@@ -117,7 +117,10 @@ export default {
       const vm = this;
       const categories = new Set();
       vm.products.forEach((item) => {
-        categories.add(item.category);
+        if(item.is_enabled == 1){
+          console.log("pass");
+          categories.add(item.category);
+        }
       });
       vm.categories = Array.from(categories);
     },

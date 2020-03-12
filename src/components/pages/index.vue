@@ -7,7 +7,7 @@
                     <!-- 左側選單 (List group) -->
                     <div class="list-group sticky-top">
                         <a class="list-group-item list-group-item-action" href="#" @click.prevent="searchText = item"
-                             v-for="item in categories" :key="item" >
+                             v-for="item in categories" :key="item">
                             <i class="fa fa-street-view" aria-hidden="true"></i>
                             {{ item }}
                         </a>
@@ -24,11 +24,11 @@
                         <!-- Search bar -->
                         <form class="form-inline my-3 my-lg-0">
                             <div class="input-group">
-                                <input class="form-control" type="text" v-model="searchText" placeholder="Search"
+                                <input class="form-control" type="text" v-model="Searching" placeholder="Search"
                                     aria-label="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button" @click="searchText = ''">
-                                        <i class="fa fa-times"></i>
+                                        <i class="fas fa-binoculars"></i>
                                     </button>
                                 </div>
                             </div>
@@ -73,14 +73,21 @@ export default {
       searchText: '',
       categories: [],
       isLoading: false,
+      Searching: '',
     };
   },
   computed: {
     filterData() {
-      const vm = this;
+      const vm = this ;
       if (vm.searchText) {
         return vm.products.filter((item) => {
           const data = item.category.toLowerCase().includes(vm.searchText.toLowerCase());
+          return data;
+        });
+      }
+      if (vm.Searching) {
+        return vm.products.filter((item) => {
+          const data = item.title.toLowerCase().includes(vm.Searching.toLowerCase());
           return data;
         });
       }
@@ -118,7 +125,6 @@ export default {
       const categories = new Set();
       vm.products.forEach((item) => {
         if(item.is_enabled == 1){
-          console.log("pass");
           categories.add(item.category);
         }
       });

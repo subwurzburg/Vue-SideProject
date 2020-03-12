@@ -14,17 +14,17 @@ export default new Router({
   routes: [
     {
       path:'*',
-      redirect:"login",
+      redirect:"/login",
     },
     {
       path:'/index',
-      name:'indexl',
+      name:'index',
       component:Index
     },
 
     {
       path:'/login',
-      name:'Login',
+      name:'login',
       component:Login
     },
 

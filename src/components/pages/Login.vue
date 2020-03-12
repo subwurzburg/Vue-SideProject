@@ -20,7 +20,6 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
   data () {
     return {
       user:{
@@ -45,7 +44,7 @@ export default {
   },
 }
 </script>
-<<style scoped>
+<style scoped>
     html,
 body {
   height: 100%;
